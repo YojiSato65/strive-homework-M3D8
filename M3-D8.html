@@ -100,22 +100,26 @@
 
         async function fetchProducts()
         {
-            const response = await fetch('https://striveschool-api.herokuapp.com/api/product/')
+            const response = await fetch("https://striveschool-api.herokuapp.com/api/product/", {
+                headers: {
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI4YjA3YTRlYTdiMTAwMTVkMDY3YWIiLCJpYXQiOjE2NDY4MzM3ODYsImV4cCI6MTY0ODA0MzM4Nn0.HXN-qgIcNHJzk9-_MwpmOUG8vPKG-9Pn4-4RUz2sqaU"
+                }
+            })
             const data = await response.json()
 
             productGroup.innerHTML = data.map(product => `
             <div class="col-4">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="${product.imageUrl}" class="card-img-top" alt="image">
                     <div class="card-body">
-                        <h5 class="card-title">${product.name}product name</h5>
-                        <p class="card-text">${product.description}description</p>
-                        <p class="card-text">${product.brand}brand</p>
-                        <p class="card-text">${product.price}price</p>
+                        <h5 class="card-title">${product.name}</h5>
+                        <p class="card-text">${product.description}</p>
+                        <p class="card-text">${product.brand}</p>
+                        <p class="card-text">${product.price}</p>
                     </div>
                 </div>
             </div>
-            `).join()
+            `).join('')
         }
 
     </script>
