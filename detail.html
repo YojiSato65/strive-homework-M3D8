@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <title>Detail</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/strive-homework-M3D8/home.html">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/strive-homework-M3D8/backoffice.html">Backoffice</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1 class="text-center my-3">Product detail</h1>
+    <div class="container pt-5">
+        <div class="row d-flex">
+            <div id='image' class="p-3" style='width: 50%'>
+                <img src="" alt="" class="img-fluid">
+            </div>
+            <div class="p-3" style="width: 50%;">
+                <h3 id="name">Name</h3>
+                <p id="description">Description</p>
+                <p id="brand">Brand</p>
+                <p id="price">Price</p>
+                <!-- <a class="btn btn-info">Edit</a> -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const productID = (new URLSearchParams(window.location.search)).get('id')
+
+        const productImage = document.querySelector('img')
+        const productName = document.getElementById('name')
+        const productDescription = document.getElementById('description')
+        const productBrand = document.getElementById('brand')
+        const productPrice = document.getElementById('price')
+        // const productButton = document.querySelector('.btn')
+
+        window.onload = async function ()
+        {
+            try
+            {
+                const response = await fetch("https://striveschool-api.herokuapp.com/api/product/" + productID, {
+                    headers: {
+                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI4YjA3YTRlYTdiMTAwMTVkMDY3YWIiLCJpYXQiOjE2NDY4MzM3ODYsImV4cCI6MTY0ODA0MzM4Nn0.HXN-qgIcNHJzk9-_MwpmOUG8vPKG-9Pn4-4RUz2sqaU"
+                    }
+                })
+                const data = await response.json()
+                console.log(data)
+                productImage.src = data.imageUrl
+                productName.innerHTML = 'Product name: ' + data.name
+                productDescription.innerHTML = 'Description: ' + data.description
+                productBrand.innerHTML = 'Brand: ' + data.brand
+                productPrice.innerHTML = 'Price: $' + data.price
+                // productButton.href = '/strive-homework-M3D8/backoffice.html'
+            } catch {
+                console.log(error)
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

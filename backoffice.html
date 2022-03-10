@@ -120,18 +120,18 @@
         const price = document.getElementById("price")
         const imageUrl = document.getElementById("image")
 
-        const eventID = (new URLSearchParams(window.location.search)).get('id')
+        const productID = (new URLSearchParams(window.location.search)).get('id')
 
         const formButton = document.getElementById('form-button')
         const deleteButton = document.getElementById('delete-button')
 
         window.onload = async () =>
         {
-            if (eventID)
+            if (productID)
             {
                 try
                 {
-                    const response = await fetch("https://striveschool-api.herokuapp.com/api/product/" + eventID, {
+                    const response = await fetch("https://striveschool-api.herokuapp.com/api/product/" + productID, {
                         headers: {
                             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI4YjA3YTRlYTdiMTAwMTVkMDY3YWIiLCJpYXQiOjE2NDY4MzM3ODYsImV4cCI6MTY0ODA0MzM4Nn0.HXN-qgIcNHJzk9-_MwpmOUG8vPKG-9Pn4-4RUz2sqaU"
                         }
@@ -182,9 +182,9 @@
 
             const body = JSON.stringify(bodyObject)
 
-            const endpoint = eventID ? "https://striveschool-api.herokuapp.com/api/product/" + eventID : 'https://striveschool-api.herokuapp.com/api/product/'
+            const endpoint = productID ? "https://striveschool-api.herokuapp.com/api/product/" + productID : 'https://striveschool-api.herokuapp.com/api/product/'
 
-            const method = eventID ? 'PUT' : 'POST'
+            const method = productID ? 'PUT' : 'POST'
 
             const response = await fetch(endpoint, {
                 method: method,
@@ -199,7 +199,7 @@
             {
                 const data = await response.json()
                 console.log(data)
-                alert('New product successfully ' + (eventID ? 'updated!' : 'created!'))
+                alert('New product successfully ' + (productID ? 'updated!' : 'created!'))
                 window.location.href = "/strive-homework-M3D8/home.html"
             } else
             {
@@ -211,7 +211,7 @@
         {
             if (confirm('Are you sure you want to delete this product?'))
             {
-                const response = await fetch("https://striveschool-api.herokuapp.com/api/product/" + eventID, {
+                const response = await fetch("https://striveschool-api.herokuapp.com/api/product/" + productID, {
                     method: 'DELETE',
                     headers: {
                         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI4YjA3YTRlYTdiMTAwMTVkMDY3YWIiLCJpYXQiOjE2NDY4MzM3ODYsImV4cCI6MTY0ODA0MzM4Nn0.HXN-qgIcNHJzk9-_MwpmOUG8vPKG-9Pn4-4RUz2sqaU",
